@@ -1,0 +1,9 @@
+Sofar we have created a blog application.
+Now I need a new app 'Client'
+This app is a recordkeeping system of clients
+
+Ask for client Name, Condition, Treatment,
+It takes date and time of the treatment (by default is a the actual datetime)
+Each client may have multiple (follow up treatments)
+After selecting the clients name it rendres a list of Sessions.
+All functionality is similiar to the Blog sites
