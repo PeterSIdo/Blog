@@ -17,7 +17,8 @@ Including another URLconf
 # Blog/Blog/urls.py
 from django.contrib import admin
 from django.urls import path, include
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('myblog.urls')),  # Directs the root URL to myblog.urls
+    path('', include('client.urls')),
 ]
