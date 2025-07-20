@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Client: {{ client.name }}</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <header>
+    <h1>Edit Client: {{ client.name }}</h1>
+  </header>
+  
+  <main>
+    <section>
+      <h2>Edit Client Information</h2>
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+      </form>
+    </section>
+    <p><a href="{% url 'client_detail' client.pk %}">Back to Client Details</a></p>
+  </main>
+  
+  <footer>
+    <p>&copy; {{ current_year|default:"2023" }} Your Company Name</p>
+  </footer>
+</body>
+</html>

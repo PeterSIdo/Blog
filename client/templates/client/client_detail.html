@@ -15,6 +15,7 @@
     <h2>Client Information</h2>
     <p><strong>Condition:</strong> {{ client.condition }}</p>
     <p><strong>Initial Treatment:</strong> {{ client.treatment }}</p>
+    <p><a href="{% url 'edit_client' client.pk %}" class="edit-button">Edit Client Details</a></p>
   </section>
   <section>
     <h2>Treatment Sessions</h2>

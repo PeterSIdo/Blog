@@ -47,3 +47,14 @@ def followup_treatment(request, client_id):
     else:
         form = TreatmentSessionForm()
     return render(request, 'client/followup_treatment.html', {'form': form, 'client': client, 'sessions': sessions})
+
+def edit_client(request, pk):
+    client = get_object_or_404(Client, pk=pk)
+    if request.method == "POST":
+        form = ClientForm(request.POST, instance=client)
+        if form.is_valid():
+            client = form.save()
+            return redirect('client_detail', pk=client.pk)
+    else:
+        form = ClientForm(instance=client)
+    return render(request, 'client/edit_client.html', {'form': form, 'client': client})
