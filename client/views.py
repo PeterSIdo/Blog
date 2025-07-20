@@ -33,3 +33,17 @@ def add_client(request):
     else:
         form = ClientForm()
     return render(request, 'client/add_client.html', {'form': form})
+
+def followup_treatment(request, client_id):
+    client = get_object_or_404(Client, pk=client_id)
+    sessions = client.sessions.order_by('-date_time')
+    if request.method == "POST":
+        form = TreatmentSessionForm(request.POST)
+        if form.is_valid():
+            session = form.save(commit=False)
+            session.client = client
+            session.save()
+            return redirect('client_detail', pk=client.pk)
+    else:
+        form = TreatmentSessionForm()
+    return render(request, 'client/followup_treatment.html', {'form': form, 'client': client, 'sessions': sessions})

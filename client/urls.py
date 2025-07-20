@@ -6,4 +6,5 @@ urlpatterns = [
     path('add_client/', views.add_client, name='add_client'),
     # If you have treatment sessions, include the route as well:
     path('client/<int:client_id>/add_session/', views.add_treatment_session, name='add_treatment_session'),
+    path('client/<int:client_id>/followup/', views.followup_treatment, name='followup_treatment'),
 ]

@@ -30,10 +30,10 @@
     {% else %}
       <p>No treatment sessions recorded yet.</p>
     {% endif %}
-    <a href="{% url 'add_treatment_session' client.id %}">Add New Session</a>
+    <a href="{% url 'followup_treatment' client.id %}">Follow-up Session</a>
   </section>
   <footer>
-    <p>&copy; {{ current_year|default:"2023" }} Your Company Name</p>
+    <p>&copy; {{ current_year|default:"2025" }} My Acupuncture</p>
     <p><a href="{% url 'client_list' %}">Back to Client List</a></p>
   </footer>
 </body>

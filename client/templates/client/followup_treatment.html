@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Follow-up Treatment - {{ client.name }}</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <header>
+    <h1>Follow-up Treatment for {{ client.name }}</h1>
+  </header>
+  
+  <main>
+    <section class="client-info">
+      <h2>Client Information</h2>
+      <p><strong>Condition:</strong> {{ client.condition }}</p>
+      <p><strong>Initial Treatment:</strong> {{ client.treatment }}</p>
+    </section>
+    <section class="treatment-history">
+      <h2>Previous Treatment Sessions</h2>
+      {% if sessions %}
+        <ul>
+          {% for session in sessions %}
+            <li>
+              <strong>{{ session.date_time|date:"Y-m-d H:i" }}</strong>
+              <p>{{ session.treatment_notes }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No previous treatment sessions.</p>
+      {% endif %}
+    </section>
+    <section class="new-session">
+      <h2>Add New Treatment Session</h2>
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Session</button>
+      </form>
+    </section>
+    
+    <p><a href="{% url 'client_detail' client.id %}">Back to Client Details</a></p>
+  </main>
+</body>
+</html>
