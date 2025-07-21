@@ -10,7 +10,9 @@
   <header>
     <h1>Client Detail: {{ client.name }}</h1>
   </header>
-  
+  <section>
+    <p><a href="{% url 'client_list' %}">Back to Client List</a></p>
+  </section>
   <section>
     <h2>Client Information</h2>
     <p><strong>Condition:</strong> {{ client.condition }}</p>

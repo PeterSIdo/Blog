@@ -17,8 +17,10 @@
         {% for client in clients %}
           <li>
             <a href="{% url 'client_detail' client.pk %}">{{ client.name }}</a> <br>
+            <!-- 
             <strong>Condition:</strong> {{ client.condition }}<br>
             <strong>Treatment:</strong> {{ client.treatment }}
+-->
           </li>
         {% endfor %}
       </ul>
