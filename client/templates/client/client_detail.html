@@ -1,23 +1,15 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Client Detail</title>
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-  <header>
-    <h1>Client Detail: {{ client.name }}</h1>
-  </header>
-  <section>
-    <p><a href="{% url 'client_list' %}">Back to Client List</a></p>
-  </section>
+{% extends 'base.html' %}
+{% block title %}Edit Client: {{ client.name }}{% endblock %}
+{% block header_title %}Edit Client: {{ client.name }}{% endblock %}
+{% block content %}
+
+    <p><a href="{% url 'client_list' %}" class = "highlighted-text">Back to Client List</a></p>
+
   <section>
     <h2>Client Information</h2>
     <p><strong>Condition:</strong> {{ client.condition }}</p>
     <p><strong>Initial Treatment:</strong> {{ client.treatment }}</p>
-    <p><a href="{% url 'edit_client' client.pk %}" class="edit-button">Edit Client Details</a></p>
+    <p><a href="{% url 'edit_client' client.pk %}" class="highlighted-text">Edit Client Details</a></p>
   </section>
   <section>
     <h2>Treatment Sessions</h2>
@@ -33,11 +25,9 @@
     {% else %}
       <p>No treatment sessions recorded yet.</p>
     {% endif %}
-    <a href="{% url 'followup_treatment' client.id %}">Follow-up Session</a>
+    <a href="{% url 'followup_treatment' client.id %}" class = "highlighted-text" >Follow-up Session</a>
   </section>
-  <footer>
-    <p>&copy; {{ current_year|default:"2025" }} My Acupuncture</p>
-    <p><a href="{% url 'client_list' %}">Back to Client List</a></p>
-  </footer>
-</body>
-</html>
+
+  <p><a href="{% url 'client_list' %}" class= "highlighted-text" >Back to Client List</a></p>  
+
+{% endblock%}

@@ -1,17 +1,7 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Follow-up Treatment - {{ client.name }}</title>
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-  <header>
-    <h1>Follow-up Treatment for {{ client.name }}</h1>
-  </header>
-  
-  <main>
+{% extends 'base.html' %}
+{% block title %}Edit Client: {{ client.name }}{% endblock %}
+{% block header_title %}Edit Client: {{ client.name }}{% endblock %}
+{% block content %}
     <section class="client-info">
       <h2>Client Information</h2>
       <p><strong>Condition:</strong> {{ client.condition }}</p>
@@ -41,7 +31,5 @@
       </form>
     </section>
     
-    <p><a href="{% url 'client_detail' client.id %}">Back to Client Details</a></p>
-  </main>
-</body>
-</html>
+    <p><a href="{% url 'client_detail' client.id %}" class = "highlighted-text" >Back to Client Details</a></p>
+{% endblock %}

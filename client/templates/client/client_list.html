@@ -1,36 +1,20 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Client List</title>
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-  <header>
-    <h1>Clients</h1>
-  </header>
-  
-  <main>
+{% extends 'base.html' %}
+{% block title %}Client Lists{% endblock %}
+{% block header_title %}Clients{% endblock %}
+{% block content %}
+    <form method="GET" action="{% url 'client_list' %}">
+        <input type="text" name="q" value="{{ query }}" placeholder="Search clients...">
+        <button type="submit">Search</button>
+    </form>
     {% if clients %}
-      <ul>
-        {% for client in clients %}
-          <li>
-            <a href="{% url 'client_detail' client.pk %}">{{ client.name }}</a> <br>
-            <!-- 
-            <strong>Condition:</strong> {{ client.condition }}<br>
-            <strong>Treatment:</strong> {{ client.treatment }}
--->
-          </li>
-        {% endfor %}
-      </ul>
+        <ul>
+            {% for client in clients %}
+                <li>
+                    <a href="{% url 'client_detail' client.pk %}">{{ client.name }}</a> <br>
+                </li>
+            {% endfor %}
+        </ul>
     {% else %}
-      <p>No clients available.</p>
+        <p>No clients available.</p>
     {% endif %}
-  </main>
-  
-  <footer>
-    <p>&copy; {{ current_year|default:"2023" }} Your Company Name</p>
-  </footer>
-</body>
-</html>
+{% endblock %}

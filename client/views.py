@@ -3,10 +3,20 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ClientForm
 from .models import Client
 from .forms import ClientForm, TreatmentSessionForm
+from django.db.models import Q
 
 def client_list(request):
-    clients = Client.objects.all()
-    return render(request, 'client/client_list.html', {'clients': clients})
+    query = request.GET.get('q', '')
+    if query:
+        clients = Client.objects.filter(
+            Q(name__icontains=query) |
+            Q(condition__icontains=query) |
+            Q(treatment__icontains=query)
+        ).order_by('name')
+    else:
+        clients = Client.objects.all().order_by('name')
+    return render(request, 'client/client_list.html', {'clients': clients, 'query': query})
+
 def client_detail(request, pk):
     client = get_object_or_404(Client, pk=pk)
     sessions = client.sessions.order_by('-date_time')
@@ -58,3 +68,4 @@ def edit_client(request, pk):
     else:
         form = ClientForm(instance=client)
     return render(request, 'client/edit_client.html', {'form': form, 'client': client})
+

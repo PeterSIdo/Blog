@@ -15,11 +15,12 @@ body {
 }
 /* Header Styling */
 header {
-  background: #35424a;
+  background: #0c727d;
   color: #ffffff;
   padding: 20px 0;
   text-align: center;
   margin-bottom: 20px;
+ 
 }
 /* Main Content Area */
 main, section {
@@ -63,4 +64,8 @@ form input, form textarea, form button {
   width: 100%;
   margin-bottom: 10px;
   padding: 10px;
+}
+
+.highlighted-text {
+  color: #8B0000; /* Dark red color */
 }
