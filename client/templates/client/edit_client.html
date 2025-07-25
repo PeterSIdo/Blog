@@ -11,4 +11,6 @@
     </form>
   </section>
   <p><a href="{% url 'client_detail' client.pk %}" class = "highlighted-text" >Back to Client Details</a></p>
+  <hr> 
+  <button type="button" onclick="window.location.href='{% url 'delete_client' client.pk %}'">Delete Client</button>
 {% endblock %}

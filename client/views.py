@@ -10,7 +10,7 @@ def client_list(request):
     client_query = request.GET.get('client_query', '').strip()
     notes_query = request.GET.get('notes_query', '').strip()
     # Start with all clients
-    clients = Client.objects.all()
+    clients = Client.objects.all().order_by('name')
     # Filter by client name if provided
     if client_query:
         clients = clients.filter(name__icontains=client_query)
@@ -76,3 +76,10 @@ def edit_client(request, pk):
     else:
         form = ClientForm(instance=client)
     return render(request, 'client/edit_client.html', {'form': form, 'client': client})
+
+def delete_client(request, pk):
+    client = get_object_or_404(Client, pk=pk)
+    if request.method == "POST":
+        client.delete()
+        return redirect('client_list')
+    return render(request, 'client/delete_client.html', {'client': client})

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Delete Client: {{ client.name }}{% endblock %}
+{% block header_title %}Delete Client: {{ client.name }}{% endblock %}
+{% block content %}
+  <section>
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete client "{{ client.name }}"?</p>
+    <p>This action cannot be undone.</p>
+    <form method="POST">
+      {% csrf_token %}
+      <button type="submit">Confirm Delete</button>
+    </form>
+    <p><a href="{% url 'client_detail' client.pk %}" class="highlighted-text">Cancel</a></p>
+  </section>
+{% endblock %}

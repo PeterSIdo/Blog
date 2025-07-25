@@ -69,3 +69,12 @@ form input, form textarea, form button {
 .highlighted-text {
   color: #8B0000; /* Dark red color */
 }
+
+.warning-button {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
