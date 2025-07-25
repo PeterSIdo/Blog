@@ -5,11 +5,6 @@ class Client(models.Model):
     name = models.CharField(max_length=200)
     condition = models.TextField(help_text="Describe the client's condition")
     treatment = models.TextField(help_text="Initial treatment or notes")
-    followup_treatment = models.TextField(
-        help_text="Notes for the followup treatment session",
-        blank=True,  # Optional (if applicable) 
-        null=True    # Optional (if applicable)
-    )
     date_time = models.DateTimeField(default=timezone.now)
     def __str__(self):
         return self.name

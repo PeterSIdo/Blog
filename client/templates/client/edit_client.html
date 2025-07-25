@@ -1,4 +1,3 @@
-django
 {% extends 'base.html' %}
 {% block title %}Edit Client: {{ client.name }}{% endblock %}
 {% block header_title %}Edit Client: {{ client.name }}{% endblock %}
@@ -11,5 +10,5 @@ django
       <button type="submit">Save Changes</button>
     </form>
   </section>
-  <p><a href="{% url 'client_detail' client.pk %}">Back to Client Details</a></p>
+  <p><a href="{% url 'client_detail' client.pk %}" class = "highlighted-text" >Back to Client Details</a></p>
 {% endblock %}
