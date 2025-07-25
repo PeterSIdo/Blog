@@ -6,16 +6,24 @@ from .forms import ClientForm, TreatmentSessionForm
 from django.db.models import Q
 
 def client_list(request):
-    query = request.GET.get('q', '')
-    if query:
-        clients = Client.objects.filter(
-            Q(name__icontains=query) |
-            Q(condition__icontains=query) |
-            Q(treatment__icontains=query)
-        ).order_by('name')
-    else:
-        clients = Client.objects.all().order_by('name')
-    return render(request, 'client/client_list.html', {'clients': clients, 'query': query})
+    # Get search terms from GET parameters
+    client_query = request.GET.get('client_query', '').strip()
+    notes_query = request.GET.get('notes_query', '').strip()
+    # Start with all clients
+    clients = Client.objects.all()
+    # Filter by client name if provided
+    if client_query:
+        clients = clients.filter(name__icontains=client_query)
+    # Filter by treatment notes if provided
+    if notes_query:
+        # This filter uses the related name 'sessions' on the TreatmentSession model.
+        clients = clients.filter(sessions__treatment_notes__icontains=notes_query).distinct()
+    context = {
+        'clients': clients,
+        'client_query': client_query,
+        'notes_query': notes_query,
+    }
+    return render(request, 'client/client_list.html', context)
 
 def client_detail(request, pk):
     client = get_object_or_404(Client, pk=pk)
@@ -68,4 +76,3 @@ def edit_client(request, pk):
     else:
         form = ClientForm(instance=client)
     return render(request, 'client/edit_client.html', {'form': form, 'client': client})
-

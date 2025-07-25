@@ -2,15 +2,21 @@
 {% block title %}Client Lists{% endblock %}
 {% block header_title %}Clients{% endblock %}
 {% block content %}
+    <!-- Search form for clients by name -->
     <form method="GET" action="{% url 'client_list' %}">
-        <input type="text" name="q" value="{{ query }}" placeholder="Search clients...">
-        <button type="submit">Search</button>
+        <input type="text" name="client_query" value="{{ client_query }}" placeholder="Search clients by name...">
+        <input type="submit" value="Search" style="display: none;">
+    </form>
+    <!-- Search form for treatment notes -->
+    <form method="GET" action="{% url 'client_list' %}">
+        <input type="text" id="treatment_notes_search" name="notes_query" value="{{ notes_query }}" placeholder="Search treatment notes...">
+        <input type="submit" value="Search" style="display: none;">
     </form>
     {% if clients %}
         <ul>
             {% for client in clients %}
                 <li>
-                    <a href="{% url 'client_detail' client.pk %}">{{ client.name }}</a> <br>
+                    <a href="{% url 'client_detail' client.pk %}">{{ client.name }}</a>
                 </li>
             {% endfor %}
         </ul>
