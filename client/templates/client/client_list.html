@@ -6,7 +6,7 @@
     <a href="{% url 'add_client' %}" class="highlighted-text" > Register Client</a>
     <!-- Search form for clients by name -->
     <form method="GET" action="{% url 'client_list' %}">
-        <input type="text" name="client_query" value="{{ client_query }}" placeholder="Search clients by name...">
+        <input type="text" name="client_query" value="{{ client_query }}" placeholder="Search by name, condition or treatment...">
         <input type="submit" value="Search" style="display: none;">
     </form>
     <!-- Search form for treatment notes -->

@@ -1,17 +1,9 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Add New Client</title>
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-  <header>
-    <h1>Add New Client</h1>
-  </header>
+{% extends 'base.html' %}
+{% block title %}Client Registration {% endblock %}
+{% block header_title %}Add Client: {% endblock %}
+{% block content %}
   
-  <main>
+
     <section>
       <h2>Client Registration</h2>
       <form action="" method="POST">
@@ -21,10 +13,5 @@
       </form>
     </section>
     <p><a href="{% url 'client_list' %}">Back to Client List</a></p>
-  </main>
-  
-  <footer>
-    <p>&copy; {{ current_year|default:"2023" }} Your Company Name</p>
-  </footer>
-</body>
-</html>
+
+{% endblock %}

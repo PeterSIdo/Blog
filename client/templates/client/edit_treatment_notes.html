@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Edit Treatment Notes{% endblock %}
+{% block header_title %}Edit Treatment Notes{% endblock %}
+{% block content %}
+  <section>
+    <h2>Edit Treatment Notes</h2>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Save Changes</button>
+    </form>
+  </section>
+  
+  <section>
+    <h3>Session Details</h3>
+    <p><strong>Client:</strong> {{ session.client.name }}</p>
+    <p><strong>Date:</strong> {{ session.date_time|date:"Y-m-d H:i" }}</p>
+  </section>
+  <p><a href="{% url 'client_detail' session.client.pk %}" class="highlighted-text">Back to Client Details</a></p>
+{% endblock %}

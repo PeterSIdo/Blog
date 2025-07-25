@@ -8,7 +8,7 @@
       <p><strong>Initial Treatment:</strong> {{ client.treatment }}</p>
     </section>
     <section class="treatment-history">
-      <h2>Previous Treatment Sessions</h2>
+      <h2>Previous Treatments</h2>
       {% if sessions %}
         <ul>
           {% for session in sessions %}
@@ -23,7 +23,7 @@
       {% endif %}
     </section>
     <section class="new-session">
-      <h2>Add New Treatment Session</h2>
+      <h2>Add New Treatment Details</h2>
       <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
@@ -31,5 +31,16 @@
       </form>
     </section>
     
+    <section>
+    <h2>Last Treatment Details</h2>
+    {% if sessions %}
+    <div>
+      <strong>Date & Time:</strong> {{ session.date_time|date:"Y-m-d H:i" }}<br>
+      <strong>Notes:</strong> {{ session.treatment_notes }}
+      <a href="{% url 'edit_treatment_notes' session.id %}" class="highlighted-text">(Edit)</a>
+    </div>
+    {% endif %}
+    </section>
+
     <p><a href="{% url 'client_detail' client.id %}" class = "highlighted-text" >Back to Client Details</a></p>
 {% endblock %}

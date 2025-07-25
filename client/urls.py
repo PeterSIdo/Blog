@@ -9,4 +9,5 @@ urlpatterns = [
     path('client/<int:client_id>/followup/', views.followup_treatment, name='followup_treatment'),
     path('client/<int:pk>/edit/', views.edit_client, name='edit_client'),
     path('client/<int:pk>/delete/', views.delete_client, name='delete_client'),
+    path('session/<int:session_id>/edit/', views.edit_treatment_notes, name='edit_treatment_notes'),
 ]

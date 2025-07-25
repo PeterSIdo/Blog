@@ -4,6 +4,7 @@ from .forms import ClientForm
 from .models import Client
 from .forms import ClientForm, TreatmentSessionForm
 from django.db.models import Q
+from .models import TreatmentSession
 
 def client_list(request):
     # Get search terms from GET parameters
@@ -13,7 +14,11 @@ def client_list(request):
     clients = Client.objects.all().order_by('name')
     # Filter by client name if provided
     if client_query:
-        clients = clients.filter(name__icontains=client_query)
+        clients = clients.filter(
+            Q(name__icontains=client_query) |
+            Q(condition__icontains=client_query) |
+            Q(treatment__icontains=client_query)
+        )
     # Filter by treatment notes if provided
     if notes_query:
         # This filter uses the related name 'sessions' on the TreatmentSession model.
@@ -55,6 +60,7 @@ def add_client(request):
 def followup_treatment(request, client_id):
     client = get_object_or_404(Client, pk=client_id)
     sessions = client.sessions.order_by('-date_time')
+    latest_session = sessions.first()  # Get the most recent session
     if request.method == "POST":
         form = TreatmentSessionForm(request.POST)
         if form.is_valid():
@@ -64,7 +70,8 @@ def followup_treatment(request, client_id):
             return redirect('client_detail', pk=client.pk)
     else:
         form = TreatmentSessionForm()
-    return render(request, 'client/followup_treatment.html', {'form': form, 'client': client, 'sessions': sessions})
+    return render(request, 'client/followup_treatment.html', 
+                 {'form': form, 'client': client, 'sessions': sessions, 'session': latest_session})
 
 def edit_client(request, pk):
     client = get_object_or_404(Client, pk=pk)
@@ -83,3 +90,17 @@ def delete_client(request, pk):
         client.delete()
         return redirect('client_list')
     return render(request, 'client/delete_client.html', {'client': client})
+
+def edit_treatment_notes(request, session_id):
+    session = get_object_or_404(TreatmentSession, pk=session_id)
+    if request.method == "POST":
+        form = TreatmentSessionForm(request.POST, instance=session)
+        if form.is_valid():
+            session = form.save()
+            return redirect('client_detail', pk=session.client.pk)
+    else:
+        form = TreatmentSessionForm(instance=session)
+    return render(request, 'client/edit_treatment_notes.html', {
+        'form': form,
+        'session': session
+    })
