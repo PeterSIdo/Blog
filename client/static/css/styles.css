@@ -78,3 +78,83 @@ form input, form textarea, form button {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.client-info {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.info-block {
+  margin-bottom: 20px;
+}
+.info-block p strong {
+  color: #0c727d;
+  font-size: 1.1em;
+}
+.text-block {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 5px;
+  white-space: pre-wrap;
+  line-height: 1.5;
+  border-left: 4px solid #0c727d;
+}
+
+/* Treatment Sessions Styling */
+.treatment-sessions {
+  margin-top: 30px;
+}
+.sessions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+.session-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.session-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+.session-date {
+  font-weight: bold;
+  color: #0c727d;
+}
+.session-time {
+  color: #666;
+}
+.session-notes {
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+.session-actions {
+  text-align: right;
+}
+.edit-link {
+  color: #0c727d;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+.edit-link:hover {
+  text-decoration: underline;
+}
+.no-sessions {
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}

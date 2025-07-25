@@ -3,30 +3,46 @@
 {% block header_title %}Edit Client: {{ client.name }}{% endblock %}
 {% block content %}
 
-    <p><a href="{% url 'client_list' %}" class = "highlighted-text">Back to Client List</a></p>
+  <p><a href="{% url 'client_list' %}" class = "highlighted-text">Back to Client List</a></p>
 
-  <section>
+  <section class="client-info">
     <h2>Client Information</h2>
-    <p><strong>Condition:</strong> {{ client.condition }}</p>
-    <p><strong>Initial Treatment:</strong> {{ client.treatment }}</p>
+    <div class="info-block">
+      <p><strong>Condition:</strong></p>
+      <div class="text-block">{{ client.condition }}</div>
+    </div>
+    <div class="info-block">
+      <p><strong>Initial Treatment:</strong></p>
+      <div class="text-block">{{ client.treatment }}</div>
+    </div>
     <p><a href="{% url 'edit_client' client.pk %}" class="highlighted-text">Edit Client Details</a></p>
   </section>
-  <section>
+
+  <section class="treatment-sessions">
     <h2>Treatment Sessions</h2>
     {% if sessions %}
-      <ul>
+      <div class="sessions-list">
         {% for session in sessions %}
-          <li>
-            <strong>Date & Time:</strong> {{ session.date_time|date:"Y-m-d H:i" }}<br>
-            <strong>Notes:</strong> {{ session.treatment_notes }}
-          </li>
+          <div class="session-card">
+            <div class="session-header">
+              <span class="session-date">{{ session.date_time|date:"l, F j, Y" }}</span>
+              <span class="session-time">{{ session.date_time|date:"g:i A" }}</span>
+            </div>
+            <div class="session-notes">
+              {{ session.treatment_notes|linebreaks }}
+            </div>
+            <div class="session-actions">
+              <a href="{% url 'edit_treatment_notes' session.id %}" class="edit-link">Edit Session</a>
+            </div>
+          </div>
         {% endfor %}
-      </ul>
+      </div>
     {% else %}
-      <p>No treatment sessions recorded yet.</p>
+      <p class="no-sessions">No treatment sessions recorded yet.</p>
     {% endif %}
-    <a href="{% url 'followup_treatment' client.id %}" class = "highlighted-text" >Follow-up Session</a>
-  </section>
+    
+    <a href="{% url 'followup_treatment' client.id %}" class = "highlighted-text" >Add Follow-up Session</a>
+    </section>
 
   <p><a href="{% url 'client_list' %}" class= "highlighted-text" >Back to Client List</a></p>  
 
