@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 class Client(models.Model):
     name = models.CharField(max_length=200)
+    dob = models.DateField(null=True, blank=True)
     condition = models.TextField(help_text="Describe the client's condition")
     treatment = models.TextField(help_text="Initial treatment or notes")
     date_time = models.DateTimeField(default=timezone.now)

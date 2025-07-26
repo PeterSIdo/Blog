@@ -16,6 +16,7 @@ def client_list(request):
     if client_query:
         clients = clients.filter(
             Q(name__icontains=client_query) |
+            Q(dob__icontains=client_query) |
             Q(condition__icontains=client_query) |
             Q(treatment__icontains=client_query)
         )
