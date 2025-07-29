@@ -1,0 +1,21 @@
+git init
+git add .
+git commit -m "Initial commit"
+heroku create acuclient
+
+#use CMD not Powershell
+heroku config:set DJANGO_SECRET_KEY="io^62h8j39d!e7sa6s9)v52%*tnq7pd83cd7v3s(mgnk`&vxem+"
+
+heroku config:set DJANGO_DEBUG=False
+heroku config:set DATABASE_URL=postgres://ufgl99l0l89f49:pf5d69e2e3bbbfd36d8c1b5494e9f746748fabb79a51737ae9224bd1c3b5f926f@cfcojm7sp9tfip.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com:5432/dfhf2k411bt4tp
+
+heroku config:set DJANGO_ALLOWED_HOSTS=acuclient.herokuapp.com
+heroku config:set CSRF_TRUSTED_ORIGINS="https://acuclient.herokuapp.com"
+
+heroku config:set DJANGO_SETTINGS_MODULE=Blog.settings.prod
+git push heroku heroku:main
+heroku run python manage.py migrate
+
+
+generate secret key
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
