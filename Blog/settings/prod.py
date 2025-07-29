@@ -16,3 +16,5 @@ DATABASES = {
         ssl_require=False if DEBUG else True,  # Don't require SSL in test environment
     )
 }
+# Additional Security Settings
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
