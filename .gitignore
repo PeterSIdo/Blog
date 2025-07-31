@@ -4,6 +4,7 @@ db.sqlite3
 .env
 .venv/
 *.sqlite3
-staticfiles/
+/staticfiles/
+/static/
 .DS_Store
 
