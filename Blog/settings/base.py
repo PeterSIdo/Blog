@@ -77,11 +77,15 @@ STATICFILES_DIRS = [
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_SECONDS = 31536000  # 1 year
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
+CSRF_COOKIE_SECURE = False  # Set to True only in production
+SESSION_COOKIE_SECURE = False  # Set to True only in production
+SECURE_SSL_REDIRECT = False  # Set to True only in production
+SECURE_HSTS_SECONDS = 0  # Set to non-zero value only in production
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False  # Enable only in production
+SECURE_HSTS_PRELOAD = False  # Enable only in production
+# Development Server HTTPS Settings
+SECURE_PROXY_SSL_HEADER = None
+USE_X_FORWARDED_HOST = False
+USE_X_FORWARDED_PORT = False
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
