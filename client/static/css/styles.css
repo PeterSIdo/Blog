@@ -158,3 +158,17 @@ form input, form textarea, form button {
   background: #f8f9fa;
   border-radius: 8px;
 }
+/* Client List Styling */
+.client-list-container {
+    margin: 20px 0;
+    padding: 10px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.scrollable-client-list {
+  max-height: 300px;  /* Increased height based on browser testing */
+  overflow-y: auto;   /* Fixed incorrect value */
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;

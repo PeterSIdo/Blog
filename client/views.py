@@ -5,13 +5,17 @@ from .models import Client
 from .forms import ClientForm, TreatmentSessionForm
 from django.db.models import Q
 from .models import TreatmentSession
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 
 def client_list(request):
     # Get search terms from GET parameters
     client_query = request.GET.get('client_query', '').strip()
     notes_query = request.GET.get('notes_query', '').strip()
-    # Start with all clients
-    clients = Client.objects.all().order_by('name')
+# Get all clients without pagination
+# Get all clients and order by name, applying distinct from the start
+    clients = Client.objects.select_related().order_by('name')
+    
     # Filter by client name if provided
     if client_query:
         clients = clients.filter(
@@ -20,10 +24,26 @@ def client_list(request):
             Q(condition__icontains=client_query) |
             Q(treatment__icontains=client_query)
         )
+    
     # Filter by treatment notes if provided
     if notes_query:
-        # This filter uses the related name 'sessions' on the TreatmentSession model.
-        clients = clients.filter(sessions__treatment_notes__icontains=notes_query).distinct()
+        clients = clients.filter(sessions__treatment_notes__icontains=notes_query)
+    
+    # Ensure distinctness after all filters
+    clients = clients.distinct()
+    
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            # Get distinct clients to avoid duplicates
+            clients = clients.distinct()
+            # Return JSON response for AJAX requests
+            client_list_html = render_to_string('client/client_list_items.html', 
+                                            {'clients': clients}, 
+                                            request=request)
+            return JsonResponse({
+                'html': client_list_html,
+                'has_more': False  # Since we're not using pagination
+            })
+    
     context = {
         'clients': clients,
         'client_query': client_query,

@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "acuclient",
+        "beforeend",
         "gunicorn",
         "venv",
         "wsgi"
