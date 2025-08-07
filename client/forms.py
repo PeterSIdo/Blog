@@ -1,12 +1,17 @@
 from django import forms
 from .models import Client, TreatmentSession
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
-        fields = ['name','dob' ,'condition', 'treatment']
+        fields = ['name', 'dob', 'condition', 'treatment']
         widgets = {
-            'dob': forms.DateInput(attrs={'type': 'date'}),
+            'dob': DateInput()
         }
+
 class TreatmentSessionForm(forms.ModelForm):
     class Meta:
         model = TreatmentSession
